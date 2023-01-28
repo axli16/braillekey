@@ -183,4 +183,5 @@ def imageToBraille(img):
     textToBraille(imageToText(img))
 
 
-imageToText("puretext.jpeg")
+#imageToText("puretext.jpeg")
+

@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
+import braille
   
 # link for extract html data
 def getdata(url):
@@ -13,8 +14,10 @@ soup = BeautifulSoup(htmldata, 'html.parser')
 data = ''
 
 title = soup.find("h1").get_text()
-print(title)
+#print(title)
+#print(braille.textToBraille(title))
 
 for data in soup.find_all("p"):
     para = data.get_text()
-    print(para)
+    #print(para)
+    #print(braille.textToBraille(para))
