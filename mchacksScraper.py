@@ -12,9 +12,14 @@ htmldata = getdata(url)
 soup = BeautifulSoup(htmldata, 'html.parser')
 data = ''
 
+#Scrapes the title
 title = soup.find("h1").get_text()
-print(title)
+#print(title)
 
-for data in soup.find_all("p"):
+for data in soup.find_all("p"): #scrapes the paragraph texts
     para = data.get_text()
-    print(para)
+    #print(para)
+
+for data in soup.find_all("a"): #scrapes all the buttons 
+    buttons = data.get_text()
+    #print(buttons)
