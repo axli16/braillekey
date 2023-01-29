@@ -15,7 +15,7 @@ data = ''
 
 title = soup.find("h1").get_text()
 #print(title)
-#print(braille.textToBraille(title))
+print(braille.textToBraille(title))
 
 for data in soup.find_all("p"):
     para = data.get_text()

@@ -153,35 +153,13 @@ def textToBraille(text):
         elif char == " ":
             final_string = final_string + ascii_braille[char]
             print(char + " " + str(charToArray[" "]))
-    print(final_string)
+    #print(final_string)
     return final_string
-def textToSpeech(text):
-    if ((os.system("espeak '" + str(text) + "'")) != 0):
-        print("Client error: system does not support text-to-audio // may need to download [espeak] command line package")
-    
 def brailleToTextArray(array):
     new_chars = ''
     for key in array:
         for a_key in charToArray:
             if charToArray[a_key] == key:
                 new_chars = new_chars + str(a_key)
-    print(new_chars)
+    #print(new_chars)
     return new_chars
-def brailleToSpeechArray(array):
-    textToSpeech(brailleToTextArray(array))
-
-def brailleToSpeechImg(imgs):
-    for img in imgs:
-        for chars in letterToImgPath:
-            if img == letterToImgPath[chars]:
-                print(chars)
-def imageToText(img):
-    return image_to_string(Image.open(img))
-def imageToSpeech(img):
-    textToSpeech(imageToText(img))
-def imageToBraille(img):
-    textToBraille(imageToText(img))
-
-
-#imageToText("puretext.jpeg")
-
