@@ -80,16 +80,66 @@ finally:
         for data in soup.find_all("a"): #scrapes all the buttons 
             buttons = data.get_text()
             x.append(buttons)
-            
+        
+        del x[0:24]
 
         links = []
         for link in soup.findAll('a'):
             links.append(link.get('href'))
+        
+        del links[0:24]
 
         for i in range(len(x)):
             dictionary[x[i]] = links[i]
     for i in range(len(x)):
         print(braille.textToBraille(x[i]))
-#print(dictionary)
+
+on_scr = []
+for i in range(0,3):
+    on_scr.append(x[i])
+
+print(on_scr)
+
+j = 0
+
+while True:
+    user_input = input("Input: ")
+    if user_input == '1':
+        url = dictionary[on_scr[0]]
+        break
+    elif user_input == '2':
+        url = dictionary[on_scr[1]]
+        break
+    elif user_input == '3':
+        url = dictionary[on_scr[2]]
+        break
+    elif user_input == 'w' and j>0:
+        j -= 1
+        on_scr[2] = on_scr[1]
+        on_scr[1] = on_scr[0]
+        on_scr[0] = x[j]
+    elif user_input == 's' and j< len(x)-3:
+        j += 1
+        on_scr[0] = on_scr[1]
+        on_scr[1] = on_scr[2]
+        on_scr[2] = x[j]
+    print('On screen: ', on_scr)
+    print(x[j])
+        
+# print(url)
+htmldata = getdata(url.strip('/url?q='))
+soup = BeautifulSoup(htmldata, 'html.parser')
+data = ''
+
+#Scrapes the title
+title = soup.find("h1").get_text()
+
+print(braille.textToBraille(title))
+
+for data in soup.find_all("p"): #scrapes the paragraph texts
+    para = data.get_text()
+    print(braille.textToBraille(para))
+    # print(para)
+
 driver.quit()
 
