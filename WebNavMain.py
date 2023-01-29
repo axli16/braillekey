@@ -15,6 +15,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import speech_recognition as sr
 import time
+import braille
 
 # Initialize recognizer class (for recognizing the speech)
 
@@ -79,6 +80,7 @@ finally:
         for data in soup.find_all("a"): #scrapes all the buttons 
             buttons = data.get_text()
             x.append(buttons)
+            
 
         links = []
         for link in soup.findAll('a'):
@@ -86,6 +88,8 @@ finally:
 
         for i in range(len(x)):
             dictionary[x[i]] = links[i]
-
-print(dictionary)
+    for i in range(len(x)):
+        print(braille.textToBraille(x[i]))
+#print(dictionary)
 driver.quit()
+
